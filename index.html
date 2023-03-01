@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS-306</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      .time tr {
+        text-align: center;
+        /* background-color: cornflowerblue; */
+        color: black;
+      }
+
+      .time {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        row-gap: 10px;
+        width: 300px;
+        padding: 2px;
+        font-family: Jura;
+        position: fixed;
+        top: 20px;
+        right: 0px;
+      }
+
+      .number {
+        max-width: 20px;
+      }
+
+      .center .day:hover {
+        filter: none;
+        transform: none;
+      }
+
+      .center td:hover {
+        filter: grayscale(50%);
+        transform: rotateY(5deg);
+      }
+
+      .icon {
+        position: relative;
+        background-color: #fff;
+        box-shadow: 0px 1px 6px rgb(46 47 66 / 8%),
+          0px 1px 1px rgb(46 47 66 / 16%), 0px 2px 1px rgb(46 47 66 / 8%);
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        fill: salmon;
+        text-align: right;
+        cursor: pointer;
+        width: 90px;
+        height: 90px;
+        transform: translateX(80%);
+        transition: transform 250ms ease;
+        user-select: none;
+      }
+
+      .icon:hover,
+      .icon:focus,
+      .icon:active {
+        transform: translateX(0);
+      }
+
+      .time svg {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-44%, -40%);
+      }
+
+      .table-container {
+        position: relative;
+        width: 100%;
+      }
+
+      .time-table {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        padding-right: 0;
+        background-color: rgb(255 255 255 / 0.8);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 1px 6px rgb(46 47 66 / 8%),
+          0px 1px 1px rgb(46 47 66 / 16%), 0px 2px 1px rgb(46 47 66 / 8%);
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        transform: translateX(101%);
+        transition: transform 250ms ease;
+      }
+
+      .stop {
+        transform: translateX(0);
+      }
+
+      footer svg {
+        height: 8vh;
+        margin: 8px;
+        padding-left: 35px;
+      }
+    </style>
+    <script>
+      currentDate = new Date();
+      startDate = new Date(currentDate.getFullYear(), 0, 3);
+      var days = Math.ceil((currentDate - startDate) / (24 * 60 * 60 * 1000));
+      var weekNumber = Math.ceil(days / 7);
+
+      $(function () {
+        $("td, th").css({ border: "solid salmon", padding: "6px" });
+        $(".time-table td, .time-table th").css({
+          border: "solid salmon",
+          padding: "6px",
+        });
+        $(".day").css("border", "solid white");
+        $("a").attr("target", "_blank");
+        $(".center").css({
+          width: "100%",
+          "margin-right": "auto",
+          "margin-left": "auto",
+          "font-family": "Jura",
+          padding: "2px",
+        });
+        $("a").css({
+          "text-decoration": "none",
+          "font-family": "Jura",
+          color: "salmon",
+        });
+        $(".numer").css("text-align", "center");
+        $(".active").css({
+          "background-color": "salmon",
+          "text-align": "center",
+        });
+        $(".active a").css("color", "white");
+        if (weekNumber % 2 == 1) {
+          $(".numerator").css("background-color", "salmon");
+          $(".numerator a").css("color", "white");
+        } else {
+          $(".denominator").css("background-color", "salmon");
+          $(".denominator a").css("color", "white");
+        }
+        $(".icon").click(function () {
+          if ($(".icon").hasClass("stop")) {
+            $(".icon.stop").removeClass("stop");
+            $(".time table.stop").removeClass("stop");
+          } else {
+            $(".icon").addClass("stop");
+            $(".time table").addClass("stop");
+          }
+        });
+      });
+    </script>
+  </head>
+
+  <body style="margin: 0">
+    <div>
+      <div>
+        <table class="center">
+          <tr>
+            <th>&#x2116;</th>
+            <th colspan="2" class="disciple">Дисципліна</th>
+          </tr>
+          <tr>
+            <td class="day" colspan="3"><b>Понеділок</b></td>
+          </tr>
+          <tr>
+            <td class="numer">3</td>
+            <td class="denominator" colspan="2" style="text-align: center">
+              <a
+                href="https://us04web.zoom.us/j/6949009441?pwd=TE5ZSkhpNUVzZEYxWXBKZ0dMQ0JPZz09"
+                >Філософія (Вербова Р.М., 401 I н.к.), Практична</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">4</td>
+            <td class="denominator" style="text-align: center">
+              <a
+                href="https://us04web.zoom.us/j/74573950264?pwd=sb71DVCuaoKzbdxeCVMOhDoS3jh7jQ.1"
+                >Функційне та логічне програмування (Мокрицька О.В.),
+                Лабораторна</a
+              >
+            </td>
+            <td class="numerator" style="text-align: center">
+              <a
+                href="https://us04web.zoom.us/j/74573950264?pwd=sb71DVCuaoKzbdxeCVMOhDoS3jh7jQ.1"
+                >Функційне та логічне програмування (Мокрицька О.В.),
+                Лабораторна</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="day" colspan="3"><b>Вівторок</b></td>
+          </tr>
+          <tr>
+            <td class="numer">1</td>
+            <td class="active" colspan="2">
+              <a href="https://meet.google.com/jam-ivht-xjv"
+                >Автоматизація проектування мікроелектронних систем (Лобур М.В.)
+                325 IV н.к., Лекція</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">2</td>
+            <td class="numerator" colspan="2" style="text-align: center">
+              <a href="https://meet.google.com/gcq-nvyn-tto"
+                >Основи автоматизованого проектування складних об`єктів і систем
+                ІІ (Матвійків О.М.) 218 I н.к., Лекція</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">4</td>
+            <td class="active">
+              <a
+                href="https://us04web.zoom.us/j/9275151056?pwd=S2dSNEQrdFBUODNoeGkzT09JREN4QT09"
+                >Технології розподілених систем та паралельних обчислень
+                (Фармага І.В.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+            <td class="active">
+              <a
+                href="https://us05web.zoom.us/j/88940266859?pwd=Z2xGdSsxT3NMeWQyR3RJeE05eUJpZz09"
+                >Автоматизація проектування мікроелектронних систем (Іванина
+                В.В.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">5</td>
+            <td class="active">
+              <a
+                href="https://us05web.zoom.us/j/88940266859?pwd=Z2xGdSsxT3NMeWQyR3RJeE05eUJpZz09"
+                >Автоматизація проектування мікроелектронних систем (Іванина
+                В.В.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+            <td class="active">
+              <a
+                href="https://us04web.zoom.us/j/9275151056?pwd=S2dSNEQrdFBUODNoeGkzT09JREN4QT09"
+                >Технології розподілених систем та паралельних обчислень
+                (Фармага І.В.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="day" colspan="3"><b>Середа</b></td>
+          </tr>
+          <tr>
+            <td class="numer">1</td>
+            <td class="active">
+              <a href="https://meet.google.com/icx-uufv-sxp"
+                >Геометричне моделювання у конструюванні інженерних об`єктів та
+                систем (Денисюк П.Ю.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="numer">2</td>
+            <td class="active">
+              <a href="https://tel.meet/fuy-wene-kfq?pin=3001051803774"
+                >Основи автоматизованого проектування складних об`єктів і систем
+                ІІ (Бокла Н.І.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+            <td class="active">
+              <a href="https://meet.google.com/icx-uufv-sxp"
+                >Геометричне моделювання у конструюванні інженерних об`єктів та
+                систем (Денисюк П.Ю.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">3</td>
+            <td></td>
+            <td class="active">
+              <a
+                href="https://us04web.zoom.us/j/6763870500?pwd=SXYycUpDbGFJR3VvcXdtTFJVenh2dz09"
+                >Основи автоматизованого проектування складних об`єктів і систем
+                ІІ (Бокла Н.І.) 501 IV н.к., Лабораторна</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="day" colspan="3"><b>Четвер</b></td>
+          </tr>
+          <tr>
+            <td class="numer">3</td>
+            <td class="active" colspan="2">
+              <a
+                href="https://teams.microsoft.com/l/team/19%3ahVOEx-Ke3jX1x0t6tmWONqCSfoELlcMS0GMuJ3LoG5Y1%40thread.tacv2/conversations?groupId=1e482a42-09b8-4a35-9025-d002263b9e83&tenantId=7631cd62-5187-4e15-8b8e-ef653e366e7a"
+                >Філософія (Чурсінова О.Ю.) 218 I н.к., Лекція</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">4</td>
+            <td class="denominator" colspan="2" style="text-align: center">
+              <a href="https://meet.google.com/aja-zxpe-fbk"
+                >Геометричне моделювання у конструюванні інженерних об`єктів та
+                систем (Маркелов О.Е.) 321 I н.к., Лекція</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">5</td>
+            <td class="active" colspan="2">
+              <a
+                href="https://us04web.zoom.us/j/74573950264?pwd=sb71DVCuaoKzbdxeCVMOhDoS3jh7jQ.1"
+                >Функційне та логічне програмування (Мокрицька О.В.), Лекція</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="day" colspan="3"><b>П'ятниця</b></td>
+          </tr>
+          <tr>
+            <td class="numer">1</td>
+            <td class="active" colspan="2">
+              <a href=""
+                >Технології розподілених систем та паралельних обчислень
+                (Фармага І.В.) 217 I н.к., Лекція</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <td class="numer">2</td>
+            <td class="numerator" colspan="2" style="text-align: center">
+              <a href=""
+                >Технології розподілених систем та паралельних обчислень
+                (Фармага І.В.) 217 I н.к., Лекція</a
+              >
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="time">
+        <a class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 700 700"
+          >
+            <defs>
+              <symbol id="a" overflow="visible">
+                <path
+                  d="M18.8-1.1A13.3 13.3 0 0 1 12.5.4C9 .4 6.4-.6 4.4-2.5s-3-4.4-3-7.7c0-3.2 1-5.8 3-7.7 2-2 4.7-2.9 8-2.9a13.6 13.6 0 0 1 6.4 1.5v4.3c-1-.7-2-1.2-3-1.5-.9-.3-1.9-.5-3-.5-1.8 0-3.3.6-4.3 1.8a7.2 7.2 0 0 0-1.7 5c0 2.1.6 3.8 1.7 5 1 1.2 2.5 1.8 4.4 1.8a9.8 9.8 0 0 0 5.9-2z"
+                />
+              </symbol>
+              <symbol id="b" overflow="visible">
+                <path
+                  d="M13.7-11.1a6.8 6.8 0 0 0-2.5-.6c-1.3 0-2.3.4-3 1.2-.6.8-1 2-1 3.4V0H2.4v-15.3h4.8v2.5c.7-1 1.4-1.7 2.2-2.2a5.8 5.8 0 0 1 3.5-.7l.8.1z"
+                />
+              </symbol>
+              <symbol id="c" overflow="visible">
+                <path
+                  d="M17.6-7.7v1.4H6.2c.1 1.2.5 2 1.2 2.6.7.6 1.7.8 3 .8 1 0 2.1-.1 3.2-.4 1-.3 2.2-.8 3.3-1.4v3.8a20.6 20.6 0 0 1-7 1.3C7.3.4 5-.3 3.6-1.7a7.6 7.6 0 0 1-2.3-6c0-2.4.8-4.4 2.3-5.8a8.6 8.6 0 0 1 6.2-2.2c2.4 0 4.3.7 5.8 2.2a7.9 7.9 0 0 1 2.1 5.8zm-5-1.6c0-1-.3-1.7-.8-2.3-.5-.5-1.3-.8-2.1-.8-1 0-1.7.2-2.3.8s-1 1.3-1.1 2.3z"
+                />
+              </symbol>
+              <symbol id="d" overflow="visible">
+                <path
+                  d="M9.2-6.9c-1 0-1.8.2-2.3.5-.5.4-.8.9-.8 1.6 0 .6.2 1 .7 1.4.4.4 1 .5 1.7.5a3 3 0 0 0 2.3-1c.6-.6 1-1.4 1-2.4V-7zm7.5-1.8V0h-5v-2.3c-.6 1-1.3 1.6-2.2 2-.8.5-1.8.7-3 .7C5 .4 3.7-.1 2.7-1 1.7-2 1.2-3 1.2-4.6c0-1.8.6-3.1 1.8-4C4.3-9.3 6.2-9.7 9-9.7h2.9v-.4c0-.8-.3-1.3-1-1.7-.6-.3-1.5-.5-2.8-.5-1 0-2 0-3 .3-.9.2-1.7.5-2.5 1V-15a29.8 29.8 0 0 1 6.4-.8c2.7 0 4.7.6 6 1.7 1.2 1 1.8 2.8 1.8 5.3z"
+                />
+              </symbol>
+              <symbol id="e" overflow="visible">
+                <path
+                  d="M7.7-19.7v4.4h5v3.5h-5v6.5c0 .7.1 1.2.4 1.4s.9.4 1.7.4h2.5V0H8.1C6.1 0 4.8-.4 4-1.2 3.2-2 2.8-3.4 2.8-5.3v-6.5H.4v-3.5h2.4v-4.4z"
+                />
+              </symbol>
+              <symbol id="f" overflow="visible">
+                <path
+                  d="M12.8-13v-8.3h4.9V0h-5v-2.2c-.6.9-1.3 1.6-2.2 2S8.8.4 7.7.4C5.8.4 4.3-.4 3.1-2a9 9 0 0 1-1.8-5.7A9 9 0 0 1 3-13.4a5.7 5.7 0 0 1 4.6-2.3 6 6 0 0 1 5 2.6zM9.5-3.3c1 0 1.9-.3 2.4-1.1.6-.8.9-1.9.9-3.3 0-1.5-.3-2.6-.9-3.4A2.8 2.8 0 0 0 9.5-12c-1 0-1.8.4-2.3 1.1-.6.8-.9 1.9-.9 3.4 0 1.4.3 2.5.9 3.3.5.8 1.3 1.1 2.3 1.1z"
+                />
+              </symbol>
+              <symbol id="g" overflow="visible">
+                <path
+                  d="M10.5-3.2c1 0 1.9-.3 2.4-1.1.6-.8.8-1.9.8-3.3 0-1.5-.2-2.6-.8-3.4a2.8 2.8 0 0 0-2.4-1.1c-1 0-1.9.4-2.4 1.1-.6.8-.9 2-.9 3.4s.3 2.5.9 3.3c.5.8 1.3 1.1 2.4 1.1zM7.2-13a7 7 0 0 1 2.3-2 6 6 0 0 1 2.8-.6c2 0 3.5.8 4.7 2.3a9 9 0 0 1 1.8 5.8A9 9 0 0 1 17-2 5.7 5.7 0 0 1 12.3.4c-1 0-2-.2-2.8-.6-.8-.5-1.6-1.1-2.3-2V0H2.4v-21.3h4.8z"
+                />
+              </symbol>
+              <symbol id="h" overflow="visible">
+                <path
+                  d="M.3-15.3h5L9.2-5 13-15.3h4.8L11.3 1.5A8.2 8.2 0 0 1 9 5c-.8.7-2 1-3.4 1H2.8V2.8h1.5c.9 0 1.5-.1 1.8-.4.4-.2.7-.7 1-1.4V.6z"
+                />
+              </symbol>
+              <symbol id="i" overflow="visible">
+                <path
+                  d="M10-11.4c1.1 0 2-.2 2.4-.6.5-.4.7-1 .7-2s-.2-1.6-.7-2c-.5-.4-1.3-.6-2.4-.6H7.8v5.2zM7.8-7.7V0H2.6v-20.4h8c2.7 0 4.7.4 6 1.4 1.2.9 1.8 2.3 1.8 4.2 0 1.4-.3 2.5-1 3.3-.6 1-1.6 1.5-3 2 .8.1 1.4.5 2 1 .6.7 1.2 1.5 1.7 2.7L21 0h-5.6l-2.5-5c-.5-1.1-1-1.8-1.5-2.2-.5-.3-1.2-.5-2-.5z"
+                />
+              </symbol>
+              <symbol id="j" overflow="visible">
+                <path
+                  d="M10.8-12.5c.8 0 1.4-.2 1.8-.6.5-.3.7-.9.7-1.6 0-.7-.2-1.2-.7-1.6-.4-.3-1-.5-1.8-.5h-3v4.3zm.1 9c1 0 1.9-.3 2.4-.8.5-.4.8-1 .8-2 0-.9-.3-1.5-.8-2-.5-.4-1.3-.6-2.4-.6H8v5.3zm5-7.4c1 .3 2 1 2.5 1.8.7.9 1 2 1 3.2 0 2-.7 3.5-2 4.4C16-.5 14 0 11.4 0H2.5v-20.4h7.9c2.8 0 4.9.4 6.1 1.3 1.3.8 2 2.2 2 4 0 1-.3 2-.8 2.6-.4.7-1.1 1.2-2 1.6z"
+                />
+              </symbol>
+              <symbol id="k" overflow="visible">
+                <path d="M2.4-21.3h4.8V0H2.5z" />
+              </symbol>
+              <symbol id="l" overflow="visible">
+                <path
+                  d="M2.4-21.3h4.8v11.6l5.7-5.6h5.7l-7.5 7L19 0h-5.9l-6-6.4V0H2.4z"
+                />
+              </symbol>
+              <symbol id="m" overflow="visible">
+                <path d="M2.4-15.3h4.8V0H2.5zm0-6h4.8v4H2.5z" />
+              </symbol>
+              <symbol id="n" overflow="visible">
+                <path
+                  d="M14.3-14.8v3.7a18 18 0 0 0-5.8-1.3c-1 0-1.6.1-2 .3-.5.3-.7.6-.7 1.1 0 .4.1.7.5.9.3.2 1 .4 1.8.5H9c2.5.4 4.2 1 5 1.7 1 .7 1.3 1.8 1.3 3.4 0 1.6-.6 2.9-1.8 3.7-1.2.8-3 1.2-5.3 1.2a22 22 0 0 1-6.5-1v-3.7a13.7 13.7 0 0 0 6.1 1.4c1 0 1.7 0 2.2-.3.4-.3.7-.7.7-1.2a1 1 0 0 0-.5-1c-.3-.2-1-.4-2-.5L7.3-6a9 9 0 0 1-4.5-1.5c-1-.8-1.3-1.9-1.3-3.4 0-1.6.5-2.8 1.6-3.6a9 9 0 0 1 5.1-1.2 31.2 31.2 0 0 1 6 .9z"
+                />
+              </symbol>
+              <symbol id="o" overflow="visible">
+                <path
+                  d="M17.8-9.3V0h-5V-9.9c0-.5-.2-.8-.4-1a2 2 0 0 0-.8-.8c-.3-.2-.7-.3-1-.3-1 0-1.9.4-2.5 1.2-.6.8-.9 1.9-.9 3.3V0H2.4v-21.3h4.8v8.2c.8-.9 1.6-1.5 2.4-2a6 6 0 0 1 2.7-.6c1.8 0 3.2.6 4 1.7 1 1 1.4 2.6 1.4 4.7z"
+                />
+              </symbol>
+              <symbol id="p" overflow="visible">
+                <path
+                  d="M17.8-9.3V0h-5V-9.9c0-.5-.2-.8-.4-1a2 2 0 0 0-.8-.8c-.3-.2-.7-.3-1-.3-1 0-1.9.4-2.5 1.2-.6.8-.9 1.9-.9 3.3V0H2.4v-15.3h4.8v2.2c.8-.9 1.6-1.5 2.4-2a6 6 0 0 1 2.7-.6c1.8 0 3.2.6 4 1.7 1 1 1.4 2.6 1.4 4.7z"
+                />
+              </symbol>
+              <symbol id="q" overflow="visible">
+                <path
+                  d="M12.4-21.3v3.2H9.7c-.7 0-1.2.2-1.4.4-.3.3-.4.7-.4 1.3v1H12v3.6H8V0h-5v-11.8H.6v-3.5H3v-1c0-1.7.4-3 1.4-3.8.9-.8 2.3-1.2 4.3-1.2z"
+                />
+              </symbol>
+              <symbol id="r" overflow="visible">
+                <path
+                  d="M9.6-12.2c-1 0-1.9.4-2.4 1.2-.6.8-.9 1.9-.9 3.4s.3 2.6.9 3.3C7.7-3.5 8.6-3 9.6-3c1.1 0 2-.4 2.5-1.2.5-.7.8-1.9.8-3.3s-.3-2.6-.8-3.4a2.8 2.8 0 0 0-2.5-1.2zm0-3.5c2.7 0 4.7.7 6.2 2.2A7.8 7.8 0 0 1 18-7.6c0 2.5-.7 4.4-2.2 5.9a8.6 8.6 0 0 1-6.2 2C7 .4 5-.2 3.4-1.6a7.8 7.8 0 0 1-2.2-6c0-2.5.7-4.4 2.2-5.8a8.6 8.6 0 0 1 6.2-2.2z"
+                />
+              </symbol>
+              <symbol id="s" overflow="visible">
+                <path
+                  d="M16.5-12.8c.7-1 1.4-1.6 2.3-2.1.8-.5 1.7-.8 2.8-.8 1.7 0 3 .6 4 1.7.9 1 1.4 2.6 1.4 4.7V0h-5v-8.9c0-1-.1-1.9-.4-2.4-.3-.4-.8-.7-1.6-.7-.9 0-1.6.4-2.1 1.2a6 6 0 0 0-.8 3.3V0h-5v-8c0-1.7 0-2.8-.3-3.3-.3-.4-.9-.7-1.6-.7-1 0-1.7.4-2.2 1.2-.5.7-.7 1.8-.7 3.3V0h-5v-15.3h5v2.2c.6-.8 1.2-1.5 2-2 .8-.4 1.7-.6 2.6-.6 1 0 2 .3 2.8.8.8.5 1.4 1.2 1.8 2.1z"
+                />
+              </symbol>
+              <symbol id="t" overflow="visible">
+                <path d="M2.6-20.4h5.9l7.4 14v-14h5V0h-6L7.7-14V0h-5z" />
+              </symbol>
+              <symbol id="u" overflow="visible">
+                <path
+                  d="M2.2-6v-9.3h5v1.5L7-10.7a300.6 300.6 0 0 0 0 5.2l.4 1.2c.2.3.5.6.8.7.3.2.7.3 1.1.3 1 0 1.8-.4 2.4-1.2.6-.8.9-1.9.9-3.3v-7.5h4.9V0h-5v-2.2c-.7.9-1.4 1.5-2.3 2a6 6 0 0 1-2.7.6c-1.8 0-3.1-.5-4-1.6C2.6-2.3 2.2-4 2.2-6z"
+                />
+              </symbol>
+              <symbol id="v" overflow="visible">
+                <path
+                  d="M2.6-20.4h8.7a9 9 0 0 1 6 1.7 6 6 0 0 1 2 5 6 6 0 0 1-2 4.9 9 9 0 0 1-6 1.7H7.8V0H2.6zm5.2 3.8v5.7h3c1 0 1.8-.2 2.3-.7.6-.5.9-1.2.9-2.1 0-1-.3-1.7-.9-2.2-.5-.4-1.3-.7-2.3-.7z"
+                />
+              </symbol>
+              <symbol id="w" overflow="visible">
+                <path
+                  d="M2.4-15.3h4.8v15c0 2-.4 3.6-1.4 4.7C4.8 5.5 3.4 6 1.5 6H-1V2.8h.8c1 0 1.6-.2 2-.6.3-.4.5-1.2.5-2.5zm0-6h4.8v4H2.5z"
+                />
+              </symbol>
+              <symbol id="x" overflow="visible">
+                <path
+                  d="M14.7-14.8v4c-.6-.5-1.3-.8-2-1-.6-.3-1.3-.4-2-.4-1.4 0-2.5.4-3.3 1.2-.7.8-1.1 2-1.1 3.4s.4 2.5 1.1 3.3c.8.8 1.9 1.2 3.2 1.2.8 0 1.5-.1 2.2-.3l2-1v4a13.2 13.2 0 0 1-4.8.8C7.3.4 5-.3 3.5-1.7a7.6 7.6 0 0 1-2.3-6c0-2.5.8-4.4 2.3-5.9a9.3 9.3 0 0 1 6.5-2 13 13 0 0 1 4.7.8z"
+                />
+              </symbol>
+            </defs>
+            <path
+              fill-rule="evenodd"
+              d="M456.4 56h-5.6v42a36.4 36.4 0 1 1-72.8 0V56h-39.2v42a36.4 36.4 0 1 1-72.8 0V56h-39.2v42a36.4 36.4 0 1 1-72.8 0V56h-5.6C120 56 98 81.8 98 110.1V420c0 28 28 50.4 56 50.4h220.5c-5.3-8.7-9.6-18-12.8-28H159.6c-17 0-33.6-16.6-33.6-33.6V190.4h352.7v84.1a132.6 132.6 0 0 1 28.1 1.9V112c0-28.4-22-56-50.4-56z"
+            />
+            <path
+              d="M226.8 218.4h-33.6c-9.3 0-16.8 7.5-16.8 16.8V252c0 9.3 7.5 16.8 16.8 16.8h33.6c9.3 0 16.8-7.5 16.8-16.8v-16.8c0-9.3-7.5-16.8-16.8-16.8zM322 218.4h-33.6c-9.3 0-16.8 7.5-16.8 16.8V252c0 9.3 7.5 16.8 16.8 16.8H322c9.3 0 16.8-7.5 16.8-16.8v-16.8c0-9.3-7.5-16.8-16.8-16.8zM226.8 291.2h-33.6c-9.3 0-16.8 7.5-16.8 16.8v16.8c0 9.3 7.5 16.8 16.8 16.8h33.6c9.3 0 16.8-7.5 16.8-16.8V308c0-9.3-7.5-16.8-16.8-16.8zM322 291.2h-33.6c-9.3 0-16.8 7.5-16.8 16.8v16.8c0 9.3 7.5 16.8 16.8 16.8H322c9.3 0 16.8-7.5 16.8-16.8V308c0-9.3-7.5-16.8-16.8-16.8zM226.8 364h-33.6c-9.3 0-16.8 7.5-16.8 16.8v16.8c0 9.3 7.5 16.8 16.8 16.8h33.6c9.3 0 16.8-7.5 16.8-16.8v-16.8c0-9.3-7.5-16.8-16.8-16.8zM322 364h-33.6c-9.3 0-16.8 7.5-16.8 16.8v16.8c0 9.3 7.5 16.8 16.8 16.8H322c9.3 0 16.8-7.5 16.8-16.8v-16.8c0-9.3-7.5-16.8-16.8-16.8zM417.2 218.4h-33.6c-9.3 0-16.8 7.5-16.8 16.8V252c0 9.3 7.5 16.8 16.8 16.8h33.6c9.3 0 16.8-7.5 16.8-16.8v-16.8c0-9.3-7.5-16.8-16.8-16.8zM190.4 28c-14 0-25.2 11.3-25.2 25.2V98a25.2 25.2 0 0 0 50.4 0V53.2c0-14-11.3-25.2-25.2-25.2zM414.4 28c-14 0-25.2 11.3-25.2 25.2V98a25.2 25.2 0 0 0 50.4 0V53.2c0-14-11.3-25.2-25.2-25.2zM302.4 28c-14 0-25.2 11.3-25.2 25.2V98a25.2 25.2 0 0 0 50.4 0V53.2c0-14-11.3-25.2-25.2-25.2z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M484.4 285.5a117.6 117.6 0 1 0 0 235.2 117.6 117.6 0 0 0 0-235.2zm0 218.5a100.8 100.8 0 1 1 0-201.6 100.8 100.8 0 0 1 0 201.6z"
+            />
+            <path
+              d="M478.8 330.4c-6.2 0-11.2 5-11.2 11.2v67.2a11.2 11.2 0 0 0 22.4 0v-67.2c0-6.2-5-11.2-11.2-11.2z"
+            />
+            <path
+              d="M534.8 397.6h-56a11.2 11.2 0 0 0 0 22.4h56a11.2 11.2 0 0 0 0-22.4z"
+            />
+          </svg>
+        </a>
+        <div class="table-container">
+          <table class="time-table">
+            <tr>
+              <th class="number">№</th>
+              <th>Час початку - час закінчення</th>
+            </tr>
+            <tr>
+              <td class="number">1</td>
+              <td>8:30 - 10:05</td>
+            </tr>
+            <tr>
+              <td class="number">2</td>
+              <td>10:20 - 11:55</td>
+            </tr>
+            <tr>
+              <td class="number">3</td>
+              <td>12:10 - 13:45</td>
+            </tr>
+            <tr>
+              <td class="number">4</td>
+              <td>14:15 - 15:50</td>
+            </tr>
+            <tr>
+              <td class="number">5</td>
+              <td>16:00 - 17:35</td>
+            </tr>
+            <tr>
+              <td class="number">6</td>
+              <td>17:40 - 19:15</td>
+            </tr>
+            <tr>
+              <td class="number">7</td>
+              <td>19:20 - 20:55</td>
+            </tr>
+            <tr>
+              <td class="number">8</td>
+              <td>21:00 - 22:35</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer style="margin: 0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        <path
+          d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM164.1 325.5C182 346.2 212.6 368 256 368s74-21.8 91.9-42.5c5.8-6.7 15.9-7.4 22.6-1.6s7.4 15.9 1.6 22.6C349.8 372.1 311.1 400 256 400s-93.8-27.9-116.1-53.5c-5.8-6.7-5.1-16.8 1.6-22.6s16.8-5.1 22.6 1.6zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+        />
+      </svg>
+    </footer>
+
+    <script>
+      function getCookie(t) {
+        for (
+          var e = t + "=",
+            n = decodeURIComponent(document.cookie).split(";"),
+            o = 0;
+          o < n.length;
+          o++
+        ) {
+          for (var i = n[o]; " " == i.charAt(0); ) i = i.substring(1);
+          if (0 == i.indexOf(e)) return i.substring(e.length, i.length);
+        }
+        return "";
+      }
+      getCookie("hostinger") &&
+        ((document.cookie =
+          "hostinger=;expires=Thu, 01 Jan 1970 00:00:01 GMT;"),
+        location.reload());
+      var wordpressAdminBody = document.getElementsByClassName("wp-admin")[0],
+        notification = document.getElementsByClassName(
+          "notice notice-success is-dismissible"
+        ),
+        hostingerLogo = document.getElementsByClassName("hlogo"),
+        mainContent = document.getElementsByClassName("notice_content")[0];
+      if (
+        null != wordpressAdminBody &&
+        0 < notification.length &&
+        null != mainContent
+      ) {
+        var googleFont = document.createElement("link");
+        (googleFontHref = document.createAttribute("href")),
+          (googleFontRel = document.createAttribute("rel")),
+          (googleFontHref.value =
+            "https://fonts.googleapis.com/css?family=Roboto:300,400,600,700"),
+          (googleFontRel.value = "stylesheet"),
+          googleFont.setAttributeNode(googleFontHref),
+          googleFont.setAttributeNode(googleFontRel);
+        var css =
+            "@media only screen and (max-width: 576px) {#main_content {max-width: 320px !important;} #main_content h1 {font-size: 30px !important;} #main_content h2 {font-size: 40px !important; margin: 20px 0 !important;} #main_content p {font-size: 14px !important;} #main_content .content-wrapper {text-align: center !important;}} @media only screen and (max-width: 781px) {#main_content {margin: auto; justify-content: center; max-width: 445px;}} @media only screen and (max-width: 1325px) {.web-hosting-90-off-image-wrapper {position: absolute; max-width: 95% !important;} .notice_content {justify-content: center;} .web-hosting-90-off-image {opacity: 1;}} @media only screen and (min-width: 769px) {.notice_content {justify-content: space-between;} #main_content {margin-left: 5%; max-width: 445px;} .web-hosting-90-off-image-wrapper {position: absolute; display: flex; justify-content: center; width: 50%; margin-left: 45%;}} .web-hosting-90-off-image {max-width: 90%;} .content-wrapper {min-height: 454px; display: flex; flex-direction: column; justify-content: center; z-index: 5} .notice_content {display: flex; align-items: center;} * {-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;} .upgrade_button_red_sale{box-shadow: 0 2px 4px 0 rgba(255, 69, 70, 0.2); width: 264px; border: 0; border-radius: 3px; background-color: #FF5C62 !important; padding: 15px 55px !important; font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 600; color: #ffffff;} .upgrade_button_red_sale:hover{color: #ffffff !important; background: #d10303 !important;}",
+          style = document.createElement("style"),
+          sheet = window.document.styleSheets[0];
+        style.styleSheet
+          ? (style.styleSheet.cssText = css)
+          : style.appendChild(document.createTextNode(css)),
+          document.getElementsByTagName("head")[0].appendChild(style),
+          document.getElementsByTagName("head")[0].appendChild(googleFont);
+        var button = document.getElementsByClassName("upgrade_button_red")[0],
+          link = button.parentElement;
+        link.setAttribute(
+          "href",
+          "https://www.hostinger.com/hosting-starter-offer?utm_source=000webhost&utm_medium=panel&utm_campaign=000-wp"
+        ),
+          (link.innerHTML =
+            '<button class="upgrade_button_red_sale">Claim Deal</button>'),
+          (notification = notification[0]).setAttribute(
+            "style",
+            "padding-bottom: 0; padding-top: 5px; background-color: #040713; background-size: cover; background-repeat: no-repeat; color: #ffffff; border-left-color: #040713;"
+          ),
+          (notification.className = "notice notice-error is-dismissible");
+        var mainContentHolder = document.getElementById("main_content");
+        mainContentHolder.setAttribute("style", "padding: 0;"),
+          hostingerLogo[0].remove();
+        var h1Tag = notification.getElementsByTagName("H1")[0];
+        (h1Tag.className = "000-h1"),
+          (h1Tag.innerHTML = "Black Friday"),
+          h1Tag.setAttribute(
+            "style",
+            'color: white; font-family: "Roboto", sans-serif; font-size: 48px; font-weight: 700;'
+          );
+        var h2Tag = document.createElement("H2");
+        (h2Tag.innerHTML =
+          "Up to 90% off 4-year hosting plans + free domain, SSL & DDoS protection"),
+          h2Tag.setAttribute(
+            "style",
+            'color: white; margin: 10px 0 15px 0; font-family: "Roboto", sans-serif; font-size: 16px; font-weight: 400; line-height: 1;'
+          ),
+          h1Tag.parentNode.insertBefore(h2Tag, h1Tag.nextSibling);
+        var paragraph = notification.getElementsByTagName("p")[0];
+        (paragraph.innerHTML =
+          "$<span style='font-size: 80px;'>2.49</span>/mo"),
+          paragraph.setAttribute(
+            "style",
+            'font-family: "Roboto", sans-serif; font-size: 48px; font-weight: 700; margin: 0;'
+          );
+        var list = notification.getElementsByTagName("UL")[0];
+        list.remove();
+        var org_html = mainContent.innerHTML,
+          new_html =
+            '<div class="content-wrapper">' +
+            mainContent.innerHTML +
+            '</div><div class="web-hosting-90-off-image-wrapper"><img class="web-hosting-90-off-image" src="https://cdn.000webhost.com/000webhost/promotions/bf-2022-bottom-banner.png"></div>';
+        mainContent.innerHTML = new_html;
+        var saleImage = mainContent.getElementsByClassName(
+          "web-hosting-90-off-image"
+        )[0];
+      }
+    </script>
+  </body>
+</html>
